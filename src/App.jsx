@@ -22,6 +22,11 @@ class App extends Component {
     // this.setState({messages: messages});
   }
 
+  handleNewUsername = (username) => {
+    console.log('New current username: ' + username.name);
+    this.setState({currentUser: username});
+  }
+
   componentDidMount() {
     console.log("componentDidMount <App />");
     this.socket;
@@ -34,11 +39,11 @@ class App extends Component {
     setTimeout(() => {
       console.log("Simulating incoming message");
       // Add a new message to the list of messages in the data store
-      const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
+      const newMessage = {id: 3, username: "Ann", content: "Hello there!"};
       const messages = this.state.messages.concat(newMessage)
       // Update the state of the app component.
       // Calling setState will trigger a call to render() in App and all child components.
-      this.setState({messages: messages})
+      this.setState({messages: messages});
     }, 3000);
   }
 
@@ -50,7 +55,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList users_msgs={this.state.messages} />
-        <ChatBar username={this.state.currentUser.name} onNewMessage={this.handleNewMessage} />
+        <ChatBar username={this.handleNewUsername} activeUser={this.state.currentUser.name} onNewMessage={this.handleNewMessage} />
       </div>
     );
   }
