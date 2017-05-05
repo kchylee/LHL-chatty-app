@@ -8,13 +8,21 @@ class MessageList extends Component {
 
     return (
       <main className="messages">
-        {this.props.users_msgs.map( usr_msg_pair => (
-          <Message key={usr_msg_pair.id} usr_msg = {usr_msg_pair} />
-        ))}
+        {this.props.users_msgs.map( (usr_msg_pair) => {
 
-        <div className="message system">
-          Anonymous1 changed their name to nomnom.
-        </div>
+          switch (usr_msg_pair.type){
+            case "incomingMessage":
+              return <Message key={usr_msg_pair.id} usr_msg = {usr_msg_pair} />
+              break;
+
+            case "incomingNotification":
+              return <div>{usr_msg_pair.content}</div>;
+              break;
+
+            default:
+              throw new Error('Unknown event type ' + usr_msg_pair.type);
+          }
+        })}
       </main>
     );
   }
