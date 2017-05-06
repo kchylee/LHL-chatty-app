@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      currentUser: {},
+      currentUser: {name: "Anonymous"},
       messages: [],
       onlineUsers: {},
       usercolor: {}
